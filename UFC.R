@@ -12,21 +12,11 @@ url = "http://www.ufcstats.com/event-details/6f81b6de2557739a"
 
 html = read_html(url)
 
-event_table = html  %>%
-  html_element("table") %>%
-  html_table()
-
-tr = html %>%
-  html_elements('tr') %>%
-  html_text2()
 
 td = html %>%
   html_elements('td') %>%
   html_text2()
   
-p = html %>%
-  html_elements('p') %>%
-  html_text2()
 
 #I'm gonna use td.
 #Every 10 elements in td corresponds to a whole row in the table
@@ -36,14 +26,50 @@ nashville23 <- tibble(W_L=rep("",24),
                           KD=columnCleaner(td,3),
                           STR=as.integer(columnCleaner(td,4)),
                           TD=columnCleaner(td,5),
-                          SUB=columnCleaner(td,6)
-                          #Weight_Class=rep(NA,24),
-                         # Method=rep(NA,24),
+                          SUB=columnCleaner(td,6),
+                          Weight_Class=rep(NA,24),
+                          Method=rep(NA,24),
                           #Round=rep(NA,24),
                           #Time=as.Date(columnCleaner(td,10))
                       )
 
+#Set W/L column
+for (i in seq(1:length(nashville23$W_L))){
+  if (i%%2 == 1){
+    nashville23$W_L[i] <- "W"
+  }
+  else {
+    nashville23$W_L[i] <- "L"
+  }
+}
 
+#Set Weight Class column
+weight <- columnCleaner(td, 7)
+duplicatedWeights <- ""
+for (i in seq(1:length(weight))){
+  duplicatedWeights <- c(duplicatedWeights, c(weight[i], weight[i]))
+}
+duplicatedWeights <- duplicatedWeights[duplicatedWeights != ""]
+duplicatedWeights
+
+nashville23$Weight_Class <- duplicatedWeights
+
+# #Set Method column
+# method <- columnCleaner(td, 8)
+# duplicatedMethods <- ""
+# for (i in seq(1:length(method))){
+#   duplicatedMethods <- c(duplicatedMethods, c(method[i], method[i]))
+# }
+# duplicatedMethods <- duplicatedMethods[duplicatedMethods != ""]
+# duplicatedMethods
+# 
+# nashville23$Method <- duplicatedMethods
+
+nashville23
+
+#histogram of significant strikes
+hist(nashville23$STR, main = "Histogram of Significant Strikes for Each Fighter",
+     xlab="Significant Strikes")
 
 
 
