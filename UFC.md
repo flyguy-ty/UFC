@@ -1,9 +1,4 @@
----
-title: "UFC Event Analysis"
-author: "Tyler Ruperti"
-date: "2023-08-09"
-output: pdf_document
----
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
