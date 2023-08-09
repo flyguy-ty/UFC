@@ -1,9 +1,4 @@
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # UFC Event Web Scraper
 
 This is a simple web scraper that can be used to convert stats from a ufc event into a tibble that can then be used for data analysis. The table is scraped from the following link: <http://www.ufcstats.com/event-details/6f81b6de2557739a>
