@@ -106,5 +106,6 @@ nashville23
 hist(nashville23$STR, main = "Histogram of Significant Strikes for Each Fighter",
      xlab="Significant Strikes")
 ```
+![](UFC/Rplot.png)
 
 
